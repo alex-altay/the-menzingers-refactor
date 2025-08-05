@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /*! Image Map Resizer
  *  Desc: Resize HTML imageMap to scaled image.
  *  Copyright: (c) 2014-15 David J. Bradshaw - dave@bradshaw.net
@@ -6,19 +8,19 @@
 
 export default function () {
   function scaleImageMap() {
-    const map = this;
-    let areas = null;
-    let cachedAreaCoordsArray = null;
-    let image = null;
-    let timer = null;
+    const map = this
+    let areas = null
+    let cachedAreaCoordsArray = null
+    let image = null
+    let timer = null
 
     function resizeMap() {
       function resizeAreaTag(cachedAreaCoords, idx) {
-        let isWidth = 0;
+        let isWidth = 0
         const scalingFactor = {
           width: image.width / image.naturalWidth,
           height: image.height / image.naturalHeight,
-        };
+        }
         const padding = {
           width: parseInt(
             window.getComputedStyle(image, null).getPropertyValue('padding-left'),
@@ -28,125 +30,114 @@ export default function () {
             window.getComputedStyle(image, null).getPropertyValue('padding-top'),
             10,
           ),
-        };
-
-        function scale(coord) {
-          isWidth = 1 - isWidth;
-          const dimension = isWidth === 1 ? 'width' : 'height';
-          return padding[dimension] + Math.floor(Number(coord) * scalingFactor[dimension]);
         }
 
-        areas[idx].coords = cachedAreaCoords
-          .split(',')
-          .map(scale)
-          .join(',');
+        function scale(coord) {
+          isWidth = 1 - isWidth
+          const dimension = isWidth === 1 ? 'width' : 'height'
+          return padding[dimension] + Math.floor(Number(coord) * scalingFactor[dimension])
+        }
+
+        areas[idx].coords = cachedAreaCoords.split(',').map(scale).join(',')
       }
 
-      cachedAreaCoordsArray.forEach(resizeAreaTag);
+      cachedAreaCoordsArray.forEach(resizeAreaTag)
     }
 
     function getCoords(e) {
       // Normalize coord-string to csv format without any space chars
-      return e.coords.replace(/ *, */g, ',').replace(/ +/g, ',');
+      return e.coords.replace(/ *, */g, ',').replace(/ +/g, ',')
     }
 
     function debounce() {
-      clearTimeout(timer);
-      timer = setTimeout(resizeMap, 250);
+      clearTimeout(timer)
+      timer = setTimeout(resizeMap, 250)
     }
 
     function start() {
-      if (
-        image.width !== image.naturalWidth
-        || image.height !== image.naturalHeight
-      ) {
-        resizeMap();
+      if (image.width !== image.naturalWidth || image.height !== image.naturalHeight) {
+        resizeMap()
       }
     }
 
     function removeResizerListeners() {
-      image.removeEventListener('load', resizeMap);
-      window.removeEventListener('focus', resizeMap);
-      window.removeEventListener('resize', debounce);
-      window.removeEventListener('readystatechange', resizeMap);
-      document.removeEventListener('fullscreenchange', resizeMap);
+      image.removeEventListener('load', resizeMap)
+      window.removeEventListener('focus', resizeMap)
+      window.removeEventListener('resize', debounce)
+      window.removeEventListener('readystatechange', resizeMap)
+      document.removeEventListener('fullscreenchange', resizeMap)
     }
 
     function addEventListeners() {
-      image.addEventListener('load', resizeMap, false); // Detect late image loads in IE11
-      window.addEventListener('focus', resizeMap, false); // Cope with window being resized whilst on another tab
-      window.addEventListener('resize', debounce, false);
-      window.addEventListener('readystatechange', resizeMap, false);
-      document.addEventListener('fullscreenchange', resizeMap, false);
-      window.removeResizerListeners = removeResizerListeners;
+      image.addEventListener('load', resizeMap, false) // Detect late image loads in IE11
+      window.addEventListener('focus', resizeMap, false) // Cope with window being resized whilst on another tab
+      window.addEventListener('resize', debounce, false)
+      window.addEventListener('readystatechange', resizeMap, false)
+      document.addEventListener('fullscreenchange', resizeMap, false)
+      window.removeResizerListeners = removeResizerListeners
     }
 
     function beenHere() {
-      return typeof map.resize === 'function';
+      return typeof map.resize === 'function'
     }
 
     function getImg(name) {
-      return document.querySelector(`img[usemap="${name}"]`);
+      return document.querySelector(`img[usemap="${name}"]`)
     }
 
     function setup() {
-      areas = map.getElementsByTagName('area');
-      cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords);
-      image = getImg(`#${map.name}`) || getImg(map.name);
-      map.resize = resizeMap; // Bind resize method to HTML map element
+      areas = map.getElementsByTagName('area')
+      cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords)
+      image = getImg(`#${map.name}`) || getImg(map.name)
+      map.resize = resizeMap // Bind resize method to HTML map element
     }
 
     if (!beenHere()) {
-      setup();
-      addEventListeners();
-      start();
+      setup()
+      addEventListeners()
+      start()
     } else {
-      map.resize(); // Already setup, so just resize map
+      map.resize() // Already setup, so just resize map
     }
   }
 
   function factory() {
-    let maps;
+    let maps
 
     function chkMap(element) {
       if (!element.tagName) {
-        throw new TypeError('Object is not a valid DOM element');
+        throw new TypeError('Object is not a valid DOM element')
       } else if (element.tagName.toUpperCase() !== 'MAP') {
-        throw new TypeError(
-          `Expected <MAP> tag, found <${element.tagName}>.`,
-        );
+        throw new TypeError(`Expected <MAP> tag, found <${element.tagName}>.`)
       }
     }
 
     function init(element) {
       if (element) {
-        chkMap(element);
-        scaleImageMap.call(element);
-        maps.push(element);
+        chkMap(element)
+        scaleImageMap.call(element)
+        maps.push(element)
       }
     }
 
     return function imageMapResizeF(target) {
-      maps = []; // Only return maps from this call
+      maps = [] // Only return maps from this call
 
       switch (typeof target) {
         case 'undefined':
         case 'string':
-          Array.prototype.forEach.call(
-            document.querySelectorAll(target || 'map'),
-            init,
-          );
-          break;
+          Array.prototype.forEach.call(document.querySelectorAll(target || 'map'), init)
+          break
         case 'object':
-          init(target);
-          break;
+          init(target)
+          break
         default:
-          throw new TypeError(`Unexpected data type (${typeof target}).`);
+          throw new TypeError(`Unexpected data type (${typeof target}).`)
       }
 
-      return maps;
-    };
+      return maps
+    }
   }
 
-  window.imageMapResize = factory();
+  window.imageMapResize = factory()
 }
