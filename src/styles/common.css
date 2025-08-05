@@ -1,0 +1,41 @@
+@import url('variables.css');
+
+.paragraph {
+  color: var(--black);
+  font-weight: 300;
+  font-size: var(--font-m);
+  line-height: normal;
+
+  @media (max-width: 600px) {
+    font-size: var(--font-s);
+  }
+}
+.link {
+  cursor: inherit;
+  border-bottom: 1px var(--black) dotted;
+  color: var(--black);
+  text-decoration: none;
+
+  &:hover {
+    position: relative;
+    left: -5px;
+    margin-right: -10px;
+    border: 2px solid var(--grey);
+    border-radius: 6px;
+    padding: 0 3px 1px;
+    pointer-events: stroke;
+  }
+}
+.no-wrap {
+  white-space: nowrap;
+}
+.desktop-hidden {
+  @media (min-width: 1024px) {
+    display: none !important;
+  }
+}
+.mobile-hidden {
+  @media (max-width: 1024px) {
+    display: none !important;
+  }
+}

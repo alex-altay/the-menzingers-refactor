@@ -1,0 +1,31 @@
+:root {
+  --grey: #919191;
+  --aimed: #ee2323;
+  --black: #1e1e1e;
+  --almost-white: #eee;
+  --white: #fff;
+  --cursor-radius: 32px;
+  --cursor-color-black: url("data:image/svg+xml,%3Csvg height='6' width='6' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='4' cy='4' fill='%231e1e1e' r='4'/%3E%3C/svg%3E");
+  --cursor-color-almost-white: url("data:image/svg+xml,%3Csvg height='6' width='6' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='4' cy='4' fill='%23eee' r='4'/%3E%3C/svg%3E");
+  --cursor-color-aimed: url("data:image/svg+xml,%3Csvg height='6' width='6' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='4' cy='4' fill='%23ee2323' r='4'/%3E%3C/svg%3E");
+  --cursor-color-hidden: none;
+  --cursor-border: var(--grey);
+  --cursor-border-black: var(--black);
+  --cursor-border-aimed: var(--aimed);
+  --cursor-border-almost-white: var(--almost-white);
+  --cursor-border-hidden: transparent;
+  --font-xs: 10px;
+  --font-s: 14px;
+  --font-m: 16px;
+  --font-l: 18px;
+  --font-xl: 24px;
+}
+
+/* Supported Breakpoints (you can't use variables in media queries)
+  600px and less - small mobiles
+  768px - big mobiles
+  1024px - small tablets
+  1366x1024 - big tablets (e.g. Ipad Pro)
+  1440x900 - WXGA
+  1920x1080 - Full HD
+*/
