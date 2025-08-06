@@ -50,6 +50,10 @@ const cursorDirectives = {
 }
 
 export function addCursorDirectives(app: App) {
+  if ('ontouchstart' in window) {
+    return
+  }
+
   for (const [name, directive] of Object.entries(cursorDirectives)) {
     app.directive(name, directive)
   }

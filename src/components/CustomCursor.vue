@@ -32,12 +32,14 @@ function hide(event: MouseEvent) {
 }
 
 onMounted(() => {
-  window.addEventListener('mousemove', update)
-  window.addEventListener('mouseout', hide)
-  window.addEventListener(
-    'wheel',
-    (event: WheelEvent) => (styleObject.value.top = `${event.pageY}px`),
-  )
+  if (!('ontouchstart' in window)) {
+    window.addEventListener('mousemove', update)
+    window.addEventListener('mouseout', hide)
+    window.addEventListener(
+      'wheel',
+      (event: WheelEvent) => (styleObject.value.top = `${event.pageY}px`),
+    )
+  }
 })
 onUnmounted(() => {
   window.removeEventListener('mousemove', update)
