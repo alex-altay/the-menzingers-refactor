@@ -1,8 +1,5 @@
 <template>
   <div :id="SHIRT_DRAWINGS_ID" class="shirt-drawings">
-    <!-- TODO Fix this left border hack -->
-    <div class="left-border-hack"></div>
-
     <picture>
       <source
         srcset="@/assets/small.jpg"
@@ -96,29 +93,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.left-border-hack {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  background-color: var(--white);
-  width: 20px;
-  height: 100%;
-}
 .background {
-  /* Set up positioning */
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  /* Image outline */
-  outline: 20px solid var(--white);
-  outline-offset: -20px;
-  width: auto;
-  /* Set up proportionate scaling */
+  width: 100%;
   height: 100%;
-  /* Disable user select */
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -126,56 +103,19 @@ onMounted(() => {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-@media (min-width: 1850px) {
-  /* Breakpoint Exception - Crop right bottom angle on image for big screens */
-  .background {
-    clip-path: polygon(0 0, 96% 0, 88% 100%, 0 100%);
-  }
-}
-@media (max-width: 1440px) and (width > 1024px) {
-  /* MacBook HiDPI */
-  .left-border-hack {
-    display: block;
-  }
-  .background {
-    left: -45px;
-  }
-}
-@media (max-width: 1024px) {
-  /* iPad */
-  .background {
-    position: static;
-    width: 100%;
-    height: auto;
-  }
-}
-@media (max-width: 768px) {
-  /* Small background picture */
-  .background {
+  @media (width <= 768px) {
     object-fit: none;
   }
-}
-@media (max-width: 768px) and (orientation: portrait) {
-  /* Small background picture */
-  .background {
+  @media (width <= 768px) and (orientation: portrait) {
     height: 100vh;
     max-height: 768px;
   }
-}
-@media (max-width: 768px) and (orientation: landscape) {
-  /* Small background picture */
-  .background {
+  @media (width <= 768px) and (orientation: landscape) {
     height: 100%;
   }
-}
-@media (min-width: 1920px) and (min-height: 1080px) {
-  /* Huge screens */
-  .background {
-    position: static;
-    outline: none;
-    outline-offset: initial;
+  @media (width >= 1920px) {
+    clip-path: polygon(0 0, 96% 0, 88% 100%, 0 100%);
   }
 }
 </style>

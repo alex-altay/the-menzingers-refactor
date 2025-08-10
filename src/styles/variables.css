@@ -19,13 +19,13 @@
   --font-m: 16px;
   --font-l: 18px;
   --font-xl: 24px;
+  --main-padding: 20px;
 }
 
 /* Supported Breakpoints (you can't use variables in media queries)
   600px and less - small mobiles
   768px - big mobiles
   1024px - small tablets
-  1366x1024 - big tablets (e.g. Ipad Pro)
   1440x900 - WXGA
   1920x1080 - Full HD
 */

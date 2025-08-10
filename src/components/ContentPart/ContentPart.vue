@@ -12,47 +12,36 @@ import MainTitle from '@/components/ContentPart/MainTitle.vue'
 <style scoped>
 .content-wrapper {
   display: flex;
-  position: relative;
   flex-direction: column;
   align-items: center;
-  z-index: 2;
   box-sizing: border-box;
-  /* TODO Fix this left border hack   */
-  background-color: var(--white);
   padding-top: 60px;
-  padding-bottom: 20px;
-  width: 785px;
-  min-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
-  @media (max-width: 1440px) and (max-height: 900px) {
-    width: 700px;
+  &::-webkit-scrollbar {
+    display: none;
   }
 
-  @media (max-width: 1024px) {
-    margin-bottom: 20px;
-    padding: 50px 0 0;
-    width: initial;
-  }
-
-  @media (min-width: 1920px) and (min-height: 1080px) {
-    height: 995px;
-  }
-
-  @media (max-width: 600px) {
-    margin-bottom: 0;
+  @media (width <= 600px) {
     padding-top: 30px;
+  }
+  @media (width <= 1024px) {
+    padding-top: 50px;
+  }
+  @media (width > 1440px) and (height >= 1080px) {
+    overflow-y: hidden;
   }
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  width: 575px;
+  max-width: 600px;
 
-  @media (max-width: 1024px) {
-    padding: 0 20px;
+  @media (width >= 1024px) {
     width: auto;
-    max-width: 575px;
   }
 }
 </style>
