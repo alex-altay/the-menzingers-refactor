@@ -51,6 +51,6 @@ const cursorDirectives = {
 
 export function addCursorDirectives(app: App) {
   for (const [name, directive] of Object.entries(cursorDirectives)) {
-    app.directive(name, 'ontouchstart' in window ? directive : {})
+    app.directive(name, 'ontouchstart' in window ? {} : directive)
   }
 }

@@ -1,5 +1,6 @@
 import MainPage from '@/components/ContentPart/MainPage.vue'
 import SongStory from '@/components/ContentPart/SongStory/SongStory.vue'
+import { CONTENT_WRAPPER_ID } from './data/constants'
 import { createRouter, createWebHistory } from 'vue-router'
 import { useTitle } from '@vueuse/core'
 
@@ -10,8 +11,12 @@ const router = createRouter({
     { path: '/:activeStory', component: SongStory, props: true },
   ],
   scrollBehavior() {
+    setTimeout(() => {
+      document.getElementById(CONTENT_WRAPPER_ID)?.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 0)
     return {
       el: 'body',
+      top: 0,
       behavior: 'smooth',
     }
   },

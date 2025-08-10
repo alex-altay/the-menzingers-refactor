@@ -20,7 +20,6 @@ body {
   @media (orientation: landscape) and (height > 600px) {
     min-width: 1440px;
   }
-
   @media (width <= 1024px) {
     min-width: initial;
   }
@@ -31,9 +30,6 @@ body {
     box-sizing: border-box;
     height: 100vh;
     overflow-y: hidden;
-  }
-  @media (width >= 1440px) {
-    overflow-x: hidden;
   }
 }
 

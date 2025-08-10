@@ -1,5 +1,5 @@
 <template>
-  <div class="content-wrapper">
+  <div class="content-wrapper" :id="CONTENT_WRAPPER_ID">
     <MainTitle />
     <RouterView class="content" />
   </div>
@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import MainTitle from '@/components/ContentPart/MainTitle.vue'
+import { CONTENT_WRAPPER_ID } from '@/data/constants'
 </script>
 
 <style scoped>
