@@ -6,8 +6,8 @@
 
 <script setup lang="ts">
 import ContentPart from '@/components/ContentPart/ContentPart.vue'
-import ShirtDrawings from '@/components/ShirtDrawings.vue'
 import CustomCursor from '@/components/CustomCursor.vue'
+import ShirtDrawings from '@/components/ShirtDrawings/ShirtDrawings.vue'
 </script>
 
 <style>
